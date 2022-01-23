@@ -1,7 +1,13 @@
 compile:
+	g++ -c -Wall -pedantic-errors Student.cpp
+	g++ -c -Wall -pedantic-errors Instructor.cpp
+	g++ -c -Wall -pedantic-errors Main.cpp
 
-Usage: main [instructor_file] [student_file]
-	./main instructors.txt students.txt
+link:
+	g++ -o main Instructor.o Student.o main.o
 
-remove:main
-	rm -f main
+run:
+	./main
+
+clean:
+	rm -f main main.o Instructor.o Student.o

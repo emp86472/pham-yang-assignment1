@@ -2,8 +2,11 @@
 #include <iostream> //idk if i actually need these in this file
 
 #include "Instructor.h" //necessary
+#include "Student.h"
 
 using namespace std; //printing out things
+
+Student Instructor::arr[] = {};
 
 bool Instructor::login(string username, string password) {
 
@@ -34,6 +37,6 @@ double Instructor::getAvg(int gradeType) {
 } //getAvg
 
     //additional functions
-void setInstructorName(string name) {
+void Instructor::setInstructorName(string name) {
     fullName = name;
 } //setInstructorName
