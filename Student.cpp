@@ -14,6 +14,10 @@ bool Student::login(string username, string password) {
 
 } //login
 
+string Student::getStudentUsername() {
+    return username;
+} // getStudentUsername
+
 string Student::getStudentName() {
     return fullName;
 } //getStudentName

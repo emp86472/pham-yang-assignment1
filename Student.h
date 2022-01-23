@@ -2,15 +2,14 @@
 
 #ifndef STUDENT_H
 #define STUDENT_H
-
 using namespace std;
-
 class Student {
 
 public:
     Student();
     bool login(string username, string password);
     string getStudentName();
+    string getStudentUsername();
     int getProjectGrade();
     int getQuizGrade();
     int getMidtermGrade();
@@ -26,10 +25,12 @@ public:
 
 private:
     string fullName;
+    string username;
     int projectGrade;
     int quizGrade;
     int midtermGrade;
     int finalGrade;
+
 
 }; //Student
 
