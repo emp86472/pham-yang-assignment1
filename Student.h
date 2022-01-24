@@ -17,7 +17,8 @@ public:
     double getOverallGrade();
 
     //additional functions
-    void setStudentName(string fullName);
+    void setStudentName(string name);
+    void setStudentUsername(string name);
     void setProjectGrade(int grade);
     void setQuizGrade(int grade);
     void setMidtermGrade(int grade);
@@ -25,7 +26,7 @@ public:
 
 private:
     string fullName;
-    string username;
+    string userName;
     int projectGrade;
     int quizGrade;
     int midtermGrade;

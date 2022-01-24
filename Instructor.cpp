@@ -9,7 +9,7 @@ using namespace std; //printing out things
 Student Instructor::arr[] = {};
 
 bool Instructor::login(string username, string password) {
-
+    return true;
 } //login
 
 Instructor::Instructor() {
@@ -27,7 +27,7 @@ Student Instructor::getStudent(string username) {
             return arr[i];
         } // if found username
     } // for
-    return null;
+    return arr[20];
 
 } //getStudent
 
@@ -92,7 +92,7 @@ Student Instructor::getMinStudent(int gradeType) {
         } // for
         return arr[location];
     } // if
-    return null;
+    return arr[20];
 
 } //getMinStudent
 
@@ -158,7 +158,7 @@ Student Instructor::getMaxStudent(int gradeType) {
         } // for
         return arr[location];
     } // if
-    return null;
+    return arr[20];
 
 } //getMaxStudent
 
@@ -201,12 +201,20 @@ double Instructor::getAvg(int gradeType) {
         for (int i = 0; i < 20; i++) {
             average += arr[i].getOverallGrade();
         } // for
-        return average;
+        return average / 20;
     } // if
-    return null;
+    return -1;
 } //getAvg
 
     //additional functions
+void Instructor::setInstructorUsername(string name) {
+    userName = name;
+} //setInstructorName
+
+void Instructor::setInstructorPassword(string pw) {
+    password = pw;
+} //setInstructorName
+
 void Instructor::setInstructorName(string name) {
     fullName = name;
 } //setInstructorName

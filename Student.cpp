@@ -11,11 +11,11 @@ Student::Student() {
 } //Student
 
 bool Student::login(string username, string password) {
-
+    return true;
 } //login
 
 string Student::getStudentUsername() {
-    return username;
+    return userName;
 } // getStudentUsername
 
 string Student::getStudentName() {
@@ -38,13 +38,17 @@ int Student::getFinalGrade() {
 } //getFinalGrade
 
 double Student::getOverallGrade() {
-    //calculated by previous grades
+    return 0;
 } //getOverallGrade
 
 //additional functions
 void Student::setStudentName(string name) {
     fullName = name;
 } //setStudentName
+
+void Student::setStudentUsername(string name) {
+    userName = name;
+} //setStudentUsername
 
 void Student::setProjectGrade(int grade) {
     projectGrade = grade;
