@@ -69,3 +69,12 @@ void Student::setMidtermGrade(int grade) {
 void Student::setFinalGrade(int grade) {
     finalGrade = grade;
 } //setFinalGrade
+
+void Student::printGrades() {
+    cout << "Student name: " << fullName << endl;
+    printf("\tProject %i%%", projectGrade);
+    printf("\tQuiz    %i%%", quizGrade);
+    printf("\tMidterm %i%%", midtermGrade);
+    printf("\tFinal   %i%%", finalGrade);
+    printf("\tOverall %f%%", getOverallGrade());
+} //printGrades
