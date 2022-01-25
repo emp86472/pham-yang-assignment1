@@ -1,7 +1,7 @@
 compile:
 	g++ -c -Wall -pedantic-errors Student.cpp
 	g++ -c -Wall -pedantic-errors Instructor.cpp
-	g++ -c -Wall -pedantic-errors Main.cpp
+	g++ -c -Wall -pedantic-errors main.cpp
 
 link:
 	g++ -o main Instructor.o Student.o main.o

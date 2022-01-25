@@ -1,11 +1,12 @@
 #include <iostream>
-#include <ifstream>
+#include <fstream>
 #include <sstream>
 
 #include "Instructor.h"
 #include "Student.h"
 using namespace std;
 //need includes to read txt files!
+
 
 int main(int argc, char *argv[]) {
     /**
@@ -23,9 +24,8 @@ int main(int argc, char *argv[]) {
     ifstream sFile;
     sFile.open(argv[2]); //student file
 
-    Instructor instructor;
     Instructor iarr[3] = {};
-    Student * sarr = instructor.getArr();
+    Student * sarr = &Instructor::arr[0];
 
     if (iFile.is_open() && sFile.is_open()) {
         cout << "Parsing instructors and students information success." << endl;
@@ -36,7 +36,7 @@ int main(int argc, char *argv[]) {
             slines[i] = line;
         } //for
         for (int i = 0; i < 20; i++) {
-            stringsstream ss;
+            stringstream ss;
             ss << slines[i];
             string s;
             int n;
@@ -60,10 +60,9 @@ int main(int argc, char *argv[]) {
             ilines[i] = line;
         } //for
         for (int i = 0; i < 3; i++) {
-            stringsstream ss;
+            stringstream ss;
             ss << ilines[i];
             string s;
-            int n;
             ss >> s;
             iarr[i].setInstructorUsername(s);
             ss >> s;
@@ -71,19 +70,57 @@ int main(int argc, char *argv[]) {
             ss >> s;
             iarr[i].setInstructorName(s);
         } //for
-
     } else {
         if (!iFile.is_open()) {
-            cout << "Error: cannot parse instructors information from " + argv[1] << endl;
+            cout << "Error: cannot parse instructors information from ";
+            cout << argv[1] << endl;
         } //if
         if (!sFile.is_open()) {
-            cout << "Error: cannot parse students information from " + argv[2] << endl;
+            cout << "Error: cannot parse students information from ";
+            cout << argv[2] << endl;
         } //if
         return 0;
-
     } //if
+    sFile.close();
+    iFile.close();
+
+    //main loop
+    while (true) {
+        cout << "User types," << endl;
+        cout << "\t1 - Instructor" << endl;
+        cout << "\t2 - Student" << endl;
+        cout << "Select a login user type or enter 3 to exit: ";
+        int x;
+        cin >> x;
+        endl;
+        if (x == 1) {
+            cout << "Enter credentials to log in," << endl;
+            cout << "\tEnter username: ";
+            string username;
+            cin << username;
+            endl;
+            cout << "\tEnter password: ";
+            string password;
+            cin << password;
+            endl;
+            if (Instructor::getStudent(username).login(password)) {
+                //I STOPPED RIGHT HERE YOU CAN TRY TO CONTINUE
+            } else {
+                cout << "Login as student failed." << endl;
+                continue;
+            } //if
+
+        } else if (x == 2) {
+
+        } else if (x == 3) {
+            break;
+        } else {
+            cout << "Invalid option. Please enter a valid option." << endl;
+            continue;
+        } //if
+        break; //remove this
 
 
-
-
+    } //while
+    return 0;
 } //main

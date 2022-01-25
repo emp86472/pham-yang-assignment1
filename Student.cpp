@@ -10,8 +10,8 @@ Student::Student() {
     //dont need default values for member variables?
 } //Student
 
-bool Student::login(string username, string password) {
-    return true;
+bool Student::login(string pw) {
+    return password.compare(pw) == 0;
 } //login
 
 string Student::getStudentUsername() {
@@ -48,6 +48,10 @@ void Student::setStudentName(string name) {
 
 void Student::setStudentUsername(string name) {
     userName = name;
+} //setStudentUsername
+
+void Student::setStudentPassword(string pw) {
+    password = pw;
 } //setStudentUsername
 
 void Student::setProjectGrade(int grade) {

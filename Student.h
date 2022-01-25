@@ -19,6 +19,7 @@ public:
     //additional functions
     void setStudentName(string name);
     void setStudentUsername(string name);
+    void setStudentPassword(string pw);
     void setProjectGrade(int grade);
     void setQuizGrade(int grade);
     void setMidtermGrade(int grade);
@@ -27,6 +28,7 @@ public:
 private:
     string fullName;
     string userName;
+    string password;
     int projectGrade;
     int quizGrade;
     int midtermGrade;
