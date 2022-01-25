@@ -20,7 +20,7 @@ string Instructor::getInstructorName() {
     return fullName;
 } //getInstructorName
 
-static Student Instructor::getStudent(string username) {
+Student Instructor::getStudent(string username) {
 
     for (int i = 0; i < 20; i++) {
         if(arr[i].getStudentUsername().compare(username) == 0) {

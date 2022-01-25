@@ -6,7 +6,7 @@ class Student {
 
 public:
     Student();
-    bool login(string username, string password);
+    bool login(string password);
     string getStudentName();
     string getStudentUsername();
     int getProjectGrade();
@@ -23,6 +23,7 @@ public:
     void setQuizGrade(int grade);
     void setMidtermGrade(int grade);
     void setFinalGrade(int grade);
+    void printGrades();
 
 private:
     string fullName;

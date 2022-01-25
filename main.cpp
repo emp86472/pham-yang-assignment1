@@ -24,7 +24,7 @@ int main(int argc, char *argv[]) {
     ifstream sFile;
     sFile.open(argv[2]); //student file
 
-    Instructor iarr[3] = {};
+    Instructor iarr[2] = {};
     Student * sarr = &Instructor::arr[0];
 
     if (iFile.is_open() && sFile.is_open()) {
@@ -74,15 +74,19 @@ int main(int argc, char *argv[]) {
         if (!iFile.is_open()) {
             cout << "Error: cannot parse instructors information from ";
             cout << argv[1] << endl;
+            cout << endl;
         } //if
         if (!sFile.is_open()) {
             cout << "Error: cannot parse students information from ";
             cout << argv[2] << endl;
+            cout << endl;
         } //if
         return 0;
     } //if
     sFile.close();
     iFile.close();
+
+    //cout << "we made it here!" << endl;
 
     //main loop
     while (true) {
@@ -92,19 +96,35 @@ int main(int argc, char *argv[]) {
         cout << "Select a login user type or enter 3 to exit: ";
         int x;
         cin >> x;
-        endl;
+        cout << endl;
+        cout << endl;
         if (x == 1) {
             cout << "Enter credentials to log in," << endl;
             cout << "\tEnter username: ";
             string username;
-            cin << username;
-            endl;
+            cin >> username;
+            cout << endl;
             cout << "\tEnter password: ";
             string password;
-            cin << password;
-            endl;
-            if (Instructor::getStudent(username).login(password)) {
-                //I STOPPED RIGHT HERE YOU CAN TRY TO CONTINUE
+            cin >> password;
+            cout << endl;
+            cout << endl;
+            Student student = Instructor::getStudent(username);
+            if (student.login(password)) {
+                cout << "You are now logged in as ";
+                cout << student.getStudentName();
+                cout << "\n\n";
+                cout << "Do you want to view grades (y/n)? ";
+                string s;
+                cin >> s;
+                cout << endl;
+                cout << endl;
+                if (s == "y") {
+                    student.printGrades();
+                    cout << endl;
+                    cout << endl;
+                } //if
+                continue;
             } else {
                 cout << "Login as student failed." << endl;
                 continue;

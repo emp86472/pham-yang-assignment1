@@ -3,11 +3,11 @@ compile:
 	g++ -c -Wall -pedantic-errors Instructor.cpp
 	g++ -c -Wall -pedantic-errors main.cpp
 
-link:
+link: compile
 	g++ -o main Instructor.o Student.o main.o
 
-run:
-	./main
+run: link
+	./main instructors.txt students.txt
 
 clean:
 	rm -f main main.o Instructor.o Student.o
