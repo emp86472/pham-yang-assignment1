@@ -8,8 +8,8 @@ using namespace std; //printing out things
 
 Student Instructor::arr[] = {};
 
-bool Instructor::login(string username, string password) {
-    return true;
+bool Instructor::login(string password) {
+    return password.compare(pw) == 0;
 } //login
 
 Instructor::Instructor() {

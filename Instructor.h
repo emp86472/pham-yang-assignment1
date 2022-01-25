@@ -11,7 +11,8 @@ class Instructor {
 public:
     //static Student arr[20];
     Instructor();
-    bool login(string username, string password);
+    bool login(string pw);
+    string getInstructorUsername();
     string getInstructorName();
     static Student getStudent(string username);
     Student getMinStudent(int gradeType);
