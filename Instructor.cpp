@@ -8,7 +8,7 @@ using namespace std; //printing out things
 
 Student Instructor::arr[] = {};
 
-bool Instructor::login(string password) {
+bool Instructor::login(string pw) {
     return password.compare(pw) == 0;
 } //login
 
@@ -19,6 +19,10 @@ Instructor::Instructor() {
 string Instructor::getInstructorName() {
     return fullName;
 } //getInstructorName
+
+string Instructor::getInstructorUsername() {
+    return userName;
+} //getInstructorUsername
 
 Student Instructor::getStudent(string username) {
 
@@ -218,3 +222,16 @@ void Instructor::setInstructorPassword(string pw) {
 void Instructor::setInstructorName(string name) {
     fullName = name;
 } //setInstructorName
+
+void Instructor::printGradeStats(int gradeType) {
+    if (gradeType < 1 || gradeType > 5) {
+        return;
+    } //if
+    string arr[5] = {"Project", "Quiz", "Midterm", "Final", "Overall"};
+    cout << arr[gradeType - 1] << " grade stats," << endl;
+    cout << "min  " << Instructor::getMinStudent(gradeType).getProjectGrade() << "% ("
+         << Instructor::getMinStudent(gradeType).getStudentName() << ")" << endl;
+    cout << "max  " << Instructor::getMaxStudent(gradeType).getProjectGrade() << "% ("
+         << Instructor::getMaxStudent(gradeType).getStudentName() << ")" << endl;
+    cout << "avg  " << Instructor::getAvg(gradeType) << "%" << endl;
+} //printGradeStats

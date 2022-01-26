@@ -9,11 +9,7 @@ using namespace std;
 
 
 int main(int argc, char *argv[]) {
-    /**
-     * we should read txt files here and use
-     * our classes and methods to print out stuff
-     * our main loop
-     */
+
     if (argc != 3) {
         cout << "Usage: main [instructor_file] [student_file]" << endl;
         return 0;
@@ -24,7 +20,7 @@ int main(int argc, char *argv[]) {
     ifstream sFile;
     sFile.open(argv[2]); //student file
 
-    Instructor iarr[2] = {};
+    Instructor iarr[3] = {};
     Student * sarr = &Instructor::arr[0];
 
     if (iFile.is_open() && sFile.is_open()) {
@@ -39,13 +35,15 @@ int main(int argc, char *argv[]) {
             stringstream ss;
             ss << slines[i];
             string s;
+            string d;
             int n;
             ss >> s;
             sarr[i].setStudentUsername(s);
             ss >> s;
             sarr[i].setStudentPassword(s);
             ss >> s;
-            sarr[i].setStudentName(s);
+            ss >> d;
+            sarr[i].setStudentName(s + " " + d);
             ss >> n;
             sarr[i].setProjectGrade(n);
             ss >> n;
@@ -63,8 +61,10 @@ int main(int argc, char *argv[]) {
             stringstream ss;
             ss << ilines[i];
             string s;
+            string d;
             ss >> s;
-            iarr[i].setInstructorUsername(s);
+            ss >> d;
+            iarr[i].setInstructorUsername(s + " " + d);
             ss >> s;
             iarr[i].setInstructorPassword(s);
             ss >> s;
@@ -97,17 +97,14 @@ int main(int argc, char *argv[]) {
         int x;
         cin >> x;
         cout << endl;
-        cout << endl;
-        if (x == 1) {
+        if (x == 2) {
             cout << "Enter credentials to log in," << endl;
             cout << "\tEnter username: ";
             string username;
             cin >> username;
-            cout << endl;
             cout << "\tEnter password: ";
             string password;
             cin >> password;
-            cout << endl;
             cout << endl;
             Student student = Instructor::getStudent(username);
             if (student.login(password)) {
@@ -118,28 +115,23 @@ int main(int argc, char *argv[]) {
                 string s;
                 cin >> s;
                 cout << endl;
-                cout << endl;
                 if (s == "y") {
                     student.printGrades();
-                    cout << endl;
-                    cout << endl;
                 } //if
-                continue;
             } else {
                 cout << "Login as student failed." << endl;
-                continue;
+                cout << endl;
             } //if
 
-        } else if (x == 2) {
+        } else if (x == 1) {
             cout << "Enter credentials to log in," << endl;
             cout << "\tEnter username: ";
             string username;
             cin >> username;
-            endl;
             cout << "\tEnter password: ";
             string password;
             cin >> password;
-            endl;
+            cout << endl;
             int location = 0;
             int iteration = 0;
             for (int i = 0; i < 3; i++) {
@@ -149,15 +141,17 @@ int main(int argc, char *argv[]) {
                 iteration = i;
             } // for
             if (location != iteration) {// no such username
-                cout << "login as Instructor failed." << endl;
+                cout << "Login as instructor failed." << endl;
+                cout << endl;
                 continue;
             } // for
-            if (iarr[location].login(password) == false) { // incorrecct password
+            if (iarr[location].login(password)) { // incorrecct password
                 cout << "Login as instructor failed" << endl;
+                cout << endl;
                 continue;
             } // if
             cout << "You are now logged in as instructor "
-                 << iarr[location].getinstructorName() << "." << endl;
+                 << iarr[location].getInstructorName() << "." << endl;
             cout << "\n";
             while(true) {
                 cout << "Query options," << endl;
@@ -172,34 +166,19 @@ int main(int argc, char *argv[]) {
                 if (option == 1) { // view grade
                     while (true) {
                         cout << "Enter student username to view grades: ";
-                        string studentUsername;
-                        cin >> studentusername;
-                        string studentName = getStudent(studentUsername).getStudentName();
-                        int projectGrade = getStudent(studentUsername).getProjectGrade();
+                        string sUsername;
+                        cin >> sUsername;
+                        Student student = Instructor::getStudent(sUsername);
+                        string studentName = student.getStudentName();
 
-                        if (projectGrade == -1) { // checks for valid username
-                            cout << "Student username is not valid.";
+                        if (studentName.length() == 0) { // checks for valid username
+                            cout << "Student username is not valid." << endl;
                             continue;
                         } // if
-
-                        int quizGrade = getStudent(studentUsername).getQuizGrade();
-                        int midtermGrade = getStudent(studentUsername).getMidtermGrade();
-                        int finalGrade = getStudent(studentUsername).getFinalGrade();
-                        double overallGrade = getStudent(studentUsername).getOverallGrade();
-
-                        cout << "Student name: " << studentName << "%" << endl;
-                        cout << "Project    " << projectGrade << "%"<< endl;
-                        cout << "Quiz       " << quizGrade << "%" << endl;
-                        cout << "Midterm    " << midtermGrade << "%" << endl;
-                        cout << "Final      " << finalGrade << "%" << endl;
-                        cout << "Overall    " << overallGrade << "%" << endl;
-                        cout << "\n";
+                        student.printGrades();
                         break;
                     } // while
-                    break;
-                } // if
-
-                if (option == 2) { // view stats
+                } else if (option == 2) { // view stats
                     while(true) {
                         cout << "Grade types," << endl;
                         cout << "   1 - Project grade" << endl;
@@ -210,78 +189,27 @@ int main(int argc, char *argv[]) {
                         cout << "Select a grade type to view stats: ";
                         int type;
                         cin >> type;
-                        cout << "\n";
+                        cout << "\n" << endl;
 
-                        if (type == 1) {
-                            cout << "Project grade stats," << endl;
-                            cout << "min  " << getMinStudent(1).getProjectGrade() << "% ("
-                                 << getMinStudent(1).getStudentName() << ")" << endl;
-                            cout << "max  " << getMaxStudent(1).getProjectGrade() << "% ("
-                                 << getMaxStudent(1).getStudentName() << ")" << endl;
-                            cout << "avg  " << getAvg(1) << "%" << endl;
+                        if (type <= 5 && type >= 1) {
+                            Instructor::printGradeStats(type);
                             break;
-                        } // if
-
-                        if (type == 2) {
-                            cout << "Quiz grade stats," << endl;
-                            cout << "min  " << getMinStudent(2).getQuizGrade() << "% ("
-                                 << getMinStudent(2).getStudentName() << ")" << endl;
-                            cout << "max  " << getMaxStudent(2).getQuizGrade() << "% ("
-                                 << getMaxStudent(2).getStudentName() << ")" << endl;
-                            cout << "avg  " << getAvg(2) << "%" << endl;
-                            break;
-                        }
-
-                        if (type == 3) {
-                            cout << "Midterm grade stats," << endl;
-                            cout << "min  " << getMinStudent(3).getMidtermGrade() << "% ("
-                                 << getMinStudent(3).getStudentName() << ")" << endl;
-                            cout << "max  " << getMaxStudent(3).getMidtermGrade() << "% ("
-                                 << getMaxStudent(3).getStudentName() << ")" << endl;
-                            cout << "avg  " << getAvg(3) << "%" << endl;
-                            break;
-                        }
-
-                        if (type == 4) {
-                            cout << "Final grade stats," << endl;
-                            cout << "min  " << getMinStudent(4).getFinalGrade() << "% ("
-                                 << getMinStudent(4).getStudentName() << ")" << endl;
-                            cout << "max  " << getMaxStudent(4).getFinalGrade() << "% ("
-                                 << getMaxStudent(4).getStudentName() << ")" << endl;
-                            cout << "avg  " << getAvg(4) << "%" << endl;
-                            break;
-                        }
-
-                        if (type == 5) {
-                            cout << "Overall grade stats," << endl;
-                            cout << "min  " << getMinStudent(5).getOverallGrade() << "% ("
-                                 << getMinStudent(5).getStudentName() << ")" << endl;
-                            cout << "max  " << getMaxStudent(5).getOverallGrade() << "% ("
-                                 << getMaxStudent(5).getStudentName() << ")" << endl;
-                            cout << "avg  " << getAvg(5) << "%" << endl;
-                            break;
-                        }
-                        else {
+                        } else {
                             cout << "Invalid option. Please enter a valid option." << endl;
-                        } // else
+                        } //if
                     } // while
-                    break;
-                } // if
-                else {
-                    cout << "Invalid option. Please enter a valid option.";
+                } else {
+                    cout << "Invalid option. Please enter a valid option." << endl;
+                    continue;
                 } // else
+                break;
             } // while
-
-
-
         } else if (x == 3) {
             break;
         } else {
             cout << "Invalid option. Please enter a valid option." << endl;
-            continue;
+            cout << endl;
         } //if
-        break; //remove this
-
 
     } //while
     return 0;

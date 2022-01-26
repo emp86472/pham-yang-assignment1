@@ -15,15 +15,16 @@ public:
     string getInstructorUsername();
     string getInstructorName();
     static Student getStudent(string username);
-    Student getMinStudent(int gradeType);
-    Student getMaxStudent(int gradeType);
-    double getAvg(int gradeType);
+    static Student getMinStudent(int gradeType);
+    static Student getMaxStudent(int gradeType);
+    static double getAvg(int gradeType);
     //static Student* getArr();
 
     //additional functions
     void setInstructorUsername(string name);
     void setInstructorPassword(string pw);
     void setInstructorName(string name);
+    static void printGradeStats(int gradeType);
     static Student arr[21];
 
 private:
