@@ -11,7 +11,7 @@ using namespace std;
 int main(int argc, char *argv[]) {
 
     if (argc != 3) {
-        cout << "Usage: main [instructor_file] [student_file]" << endl;
+        cout << "Usage: main [instructor_file] [student_file]\n" << endl;
         return 0;
     } //if
 
