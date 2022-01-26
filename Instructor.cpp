@@ -233,5 +233,5 @@ void Instructor::printGradeStats(int gradeType) {
          << Instructor::getMinStudent(gradeType).getStudentName() << ")" << endl;
     cout << "max  " << Instructor::getMaxStudent(gradeType).getProjectGrade() << "% ("
          << Instructor::getMaxStudent(gradeType).getStudentName() << ")" << endl;
-    cout << "avg  " << Instructor::getAvg(gradeType) << "%" << endl;
+    printf("avg  %.1f%%\n", Instructor::getAvg(gradeType));
 } //printGradeStats

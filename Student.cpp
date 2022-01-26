@@ -38,7 +38,10 @@ int Student::getFinalGrade() {
 } //getFinalGrade
 
 double Student::getOverallGrade() {
-    return 0;
+    double overallGrade;
+    overallGrade = (.3 * projectGrade) + (.1 * quizGrade)
+        + (.2 * midtermGrade) + (.4 * finalGrade);
+    return overallGrade;
 } //getOverallGrade
 
 //additional functions
@@ -76,5 +79,5 @@ void Student::printGrades() {
     printf("\tQuiz    %i%%\n", quizGrade);
     printf("\tMidterm %i%%\n", midtermGrade);
     printf("\tFinal   %i%%\n", finalGrade);
-    printf("\tOverall %f%%\n\n", getOverallGrade());
+    printf("\tOverall %.1f%%\n\n", getOverallGrade());
 } //printGrades

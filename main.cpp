@@ -63,12 +63,12 @@ int main(int argc, char *argv[]) {
             string s;
             string d;
             ss >> s;
-            ss >> d;
-            iarr[i].setInstructorUsername(s + " " + d);
+            iarr[i].setInstructorUsername(s);
             ss >> s;
             iarr[i].setInstructorPassword(s);
             ss >> s;
-            iarr[i].setInstructorName(s);
+            ss >> d;
+            iarr[i].setInstructorName(s + " " + d);
         } //for
     } else {
         if (!iFile.is_open()) {
@@ -133,20 +133,20 @@ int main(int argc, char *argv[]) {
             cin >> password;
             cout << endl;
             int location = 0;
-            int iteration = 0;
+            bool foundUsername = false;
             for (int i = 0; i < 3; i++) {
-                if (iarr[i].getInstructorUsername() == username) {
+                if (iarr[i].getInstructorUsername().compare(username) == 0) {
                     location = i;
-                }
-                iteration = i;
+                    foundUsername = true;
+                } // if
             } // for
-            if (location != iteration) {// no such username
+            if (foundUsername == false) {// no such username
                 cout << "Login as instructor failed." << endl;
                 cout << endl;
                 continue;
             } // for
-            if (iarr[location].login(password)) { // incorrecct password
-                cout << "Login as instructor failed" << endl;
+            if (!iarr[location].login(password)) { // incorrecct password
+                cout << "Login as instructor failed." << endl;
                 cout << endl;
                 continue;
             } // if
@@ -161,13 +161,13 @@ int main(int argc, char *argv[]) {
                 cout << "Enter option number: ";
                 cin >> option;
                 cout << endl;
-                cout << "\n";
 
                 if (option == 1) { // view grade
                     while (true) {
                         cout << "Enter student username to view grades: ";
                         string sUsername;
                         cin >> sUsername;
+                        cout << endl;
                         Student student = Instructor::getStudent(sUsername);
                         string studentName = student.getStudentName();
 
@@ -189,10 +189,11 @@ int main(int argc, char *argv[]) {
                         cout << "Select a grade type to view stats: ";
                         int type;
                         cin >> type;
-                        cout << "\n" << endl;
+                        cout << endl;
 
                         if (type <= 5 && type >= 1) {
                             Instructor::printGradeStats(type);
+                            cout << "\n";
                             break;
                         } else {
                             cout << "Invalid option. Please enter a valid option." << endl;
